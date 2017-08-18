@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Health Tracker</title>
 
     <!-- JavaScript Includes -->
@@ -42,27 +42,39 @@
             </div>
         </header>
 
-        <div class="row">
-
-            <article>
-                <!--                 <form class=""> -->
-                <div class="col-sm-6">
-                    <input placeholder="Enter a food" type='text' id='foodName' class="form-control added-margin-top">
-                </div>
-
-
-                <!-- </form> -->
-            </article>
-
-
-
-            <div class="col-sm-6">
-                <p><h3 >Results:</h3></p>
+        <div class="app">
+            <div class="row">
                 <article>
-                    <ul id='results'>
+                    <!--                 <form class=""> -->
+                    <div class="col-sm-6">
+                        <input placeholder="Enter a food" type='text' id='foodName' class="form-control added-margin-top">
+                    </div>
 
-                    </ul>
+
+                    <!-- </form> -->
                 </article>
+
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><h3 >Results:</h3></p>
+                    <article>
+
+                        <table class="table table-striped " >
+                            <tr>   
+                                <th>Item Name</th>
+                                <th>Brand Name</th>
+                                <th>Calories</th>
+                                <th></th>
+                            </tr>
+                            <tbody id="results">
+
+
+                            </tbody>
+                        </table>
+                    </article>
+                </div>
             </div>
         </div>
 

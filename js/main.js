@@ -2,6 +2,7 @@ $(function(){
 	var Food = Backbone.Model.extend({
 		defaults:{
 			name: 'food',
+			brand: 'branded',
 			calories: 100
 		},
 		// constructor-ish
@@ -22,16 +23,14 @@ $(function(){
 
 	// TODO: Use a DB instead of static items
 
-	var foods = new	foodList([
-		new Food({name: 'egg', calories: 100}),
-		new Food({name: 'toast', calories: 200}),
-		]);
+	var foods = new	foodList([]);
 
 
 
 
 	var foodView = Backbone.View.extend({
-		results:'#results',
+		self: this,
+		el: '.app',
 		allItems:'#items',
 		total: '#totalCalories',
 
@@ -41,26 +40,62 @@ $(function(){
 
 
 		events: {
-			'keypress #foodName' : 'lookForFoods'
+			'keyup #foodName' : 'lookForFoods',
+			'click .add-button' : 'addFood'
 		},
 
 		render: function(){
 
 			// put results from api here
-			console.log()
-			this.$el.html('<li>' + foods.models[0].get('name')  + '</li>');
 			var totals = 0;
+			var foodstr = '';
 			for(var i = 0; i < foods.models.length;i++){
 				var food = foods.models[i];
-				$(this.allItems).html($(this.allItems).html() + '\n<li>' + food.get('name') + ' : ' + food.get('calories') + ' calories. </li>')
+				foodstr += `\n<li>  ${food.get('name')} : ${food.get('calories')} calories. </li>`;
 				totals += foods.models[i].get('calories');
 			}
+			$(this.allItems).html(foodstr);
 			$(this.total).html(totals);
 
 		},
 
 		lookForFoods : function(){
-			var nutrXUrl = 'https://api.nutritionix.com/v1_1/search?appKey=674f526031aa68144af92428d45228de&appId=38e9b898&item_name=';
+			var food = $('#foodName').val().split(' ').join();
+			if(food.length > 0){
+				var nutrXUrl = 'https://api.nutritionix.com/v1_1/search/' + food + '?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=38e9b898&appKey=674f526031aa68144af92428d45228de'
+
+				$.getJSON(nutrXUrl, function(data){
+
+
+					var result = $('#results');
+					result.html('');
+					data.hits.forEach((ele)=>{
+						result.append(`<tr>
+							<td>${ele.fields.item_name} </td>
+							<td>${ele.fields.brand_name}</td>
+							<td> ${ele.fields.nf_calories} </td>
+							<td><button class="btn btn-primary add-button" id='${ele.fields.item_id}'>Add</button></td>
+							</tr>`);
+					});
+
+				}).fail((error)=>{alert('Couldnt reach nutritionix')});
+
+			}else{
+				$('#results').html('');
+			}
+		},
+		addFood : function(event){
+
+			var food_id = $(event.target).attr('id');
+			var nutrXUrl = `https://api.nutritionix.com/v1_1/item?id=${food_id}&appId=38e9b898&appKey=674f526031aa68144af92428d45228de&fields=item_name,brand_name,item_id,nf_calories`;
+			
+			$.ajax(nutrXUrl).done((data)=>{
+
+				foods.push(new Food({name: data.item_name, calories: data.nf_calories, brand: data.brand_name}));
+
+				this.render();
+			});
+
 
 		}
 	});

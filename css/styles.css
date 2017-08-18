@@ -1,7 +1,16 @@
-.added-margin-top {
-	margin-top: 20px;
+/*table{
+	width: 100%;
+	border-style: ;
+}
+*/
+
+.added-margin-top {	margin-top: 20px;}
+#results{}
+#items{
+	float: left;
 }
 
-.nomargin {
-	margin-top: 0px;
+.rightward{
+	position: absolute;
+	right: 0px;
 }
