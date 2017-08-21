@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 $(function(){
 	var Food = Backbone.Model.extend({
 		defaults:{
@@ -118,7 +119,7 @@ $(function(){
 
 		},
 		removeFood : function(event){
-			console.log(foods);
+
 			foods.models.splice(event.target.id,1);
 			localStorage.setItem('foods', JSON.stringify(foods));
 			this.render();
