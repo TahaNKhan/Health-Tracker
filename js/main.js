@@ -67,7 +67,7 @@ $(function(){
 				<td>${food.get('name')}</td>
 				<td>${food.get('calories')} </td>
 				<td><button class="btn btn-danger remove-button" id="${i}">Remove</button></td>
-				</tr>`
+				</tr>`;
 				totals += foods.models[i].get('calories');
 			}
 			$(this.allItems).html(foodstr);
@@ -78,7 +78,7 @@ $(function(){
 		lookForFoods : function(){
 			var food = $('#foodName').val();
 			if(food.length > 0){
-				var nutrXUrl = 'https://api.nutritionix.com/v1_1/search/' + food + '?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=38e9b898&appKey=674f526031aa68144af92428d45228de'
+				var nutrXUrl = 'https://api.nutritionix.com/v1_1/search/' + food + '?results=0:10&fields=item_name,brand_name,item_id,nf_calories&appId=38e9b898&appKey=674f526031aa68144af92428d45228de';
 
 				$.getJSON(nutrXUrl, function(data){
 
@@ -94,7 +94,7 @@ $(function(){
 							</tr>`);
 					});
 
-				}).fail((error)=>{alert('Couldnt reach nutritionix')});
+				}).fail((error)=>{alert('Couldnt reach nutritionix');});
 
 			}else{
 				$('#results').html('');
@@ -125,7 +125,7 @@ $(function(){
 		}
 	});
 
-	var foodView = new foodView();
+	var fv = new foodView();
 
 });
 

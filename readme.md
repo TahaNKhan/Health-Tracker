@@ -16,6 +16,5 @@
 1. jQuery
 
 ### Later additions: 
-1. Presistent storage with localStorage.
-2. Presistent perma-storage with Firebase.
-3. Add support for multiple days.
+1. Presistent perma-storage with Firebase.
+2. Add support for multiple days.
