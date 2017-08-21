@@ -27,9 +27,6 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-    <script src="js/firebase.js"></script>
-
     <script src="js/main.js"></script>
 
 </head>
@@ -65,12 +62,12 @@
                     <article>
 
                         <table class="table table-striped " >
-                            <tr>   
+                            <thead>   
                                 <th>Item Name</th>
                                 <th>Brand Name</th>
                                 <th>Calories</th>
                                 <th></th>
-                            </tr>
+                            </thead>
                             <tbody id="results">
 
 
@@ -79,21 +76,32 @@
                     </article>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>Items:</h3>
-                <ul id="items">
 
 
-                </ul>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p><h3>Items:</h3></p>
+                    <article>
+                        <table class="table table-striped" >
+                            <thead>   
+                                <th>Item Name</th>
+                                <th>Brand Name</th>
+                                <th>Calories</th>
+                                <th></th>
+                            </thead>
+                            <tbody id="items">
+
+
+                            </tbody>
+                        </table>
+                    </article>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-12">
-                <h3>Total Calories: <span id="totalCalories">0</span></h3>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Total Calories: <span id="totalCalories">0</span></h3>
+                </div>
             </div>
         </div>
     </div>
