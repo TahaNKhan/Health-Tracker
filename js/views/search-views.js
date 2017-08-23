@@ -13,7 +13,7 @@ var app = app || {};
 
 		initialize: function() {
 
-			this.appview = new app.AppView();
+			app.appview = new app.AppView();
 			this.render();
 		},
 
@@ -66,7 +66,7 @@ var app = app || {};
 				app.SearchedFoods = new app.FoodList([]);
 				this.render();
 			}
-			this.appview.render();
+			app.appview.render();
 		},
 
 
@@ -75,7 +75,7 @@ var app = app || {};
 			app.foodList.models.push(app.SearchedFoods.models[food_id]);
 			localStorage.setItem('foods', JSON.stringify(app.foodList.models));
 			app.SearchedFoods = new app.FoodList([]);
-			this.appview.render();
+			app.appview.render();
 			this.render();
 		}
 	});
