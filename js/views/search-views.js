@@ -10,7 +10,6 @@ var app = app || {};
 
 		el: '.search-app', 	
 		template : _.template($('#search_template').html()),
-		searchedFoods : new app.FoodList([]), 
 
 		initialize: function() {
 
@@ -21,9 +20,9 @@ var app = app || {};
 		render: function() {
 			this.$el.find('#results').html('');
 
-			if(this.searchedFoods.models.length > 0){
+			if(app.SearchedFoods.models.length > 0){
 
-				this.searchedFoods.models.forEach(function(model) {
+				app.SearchedFoods.models.forEach(function(model) {
 
 					this.$el.find('tbody').append(this.template(model.toJSON()));
 
@@ -48,13 +47,13 @@ var app = app || {};
 				// setTimeout(()=>{
 				$.getJSON(nutrXUrl, (data)=>{
 
-					this.searchedFoods = new app.FoodList([]);
+					app.SearchedFoods = new app.FoodList([]);
 					var index = 0;
 					data.hits.forEach((ele)=>{
 						var name = ele.fields.item_name;
 						var brand = ele.fields.brand_name;
 						var calories = ele.fields.nf_calories;
-						this.searchedFoods.push(new app.Food({name:name, brand: brand, calories: calories, id: index}));
+						app.SearchedFoods.push(new app.Food({name:name, brand: brand, calories: calories, id: index}));
 						index++;
 						
 					});
@@ -64,7 +63,7 @@ var app = app || {};
 			// }, 3000 );
 
 			}else{
-				this.searchedFoods = new app.FoodList([]);
+				app.SearchedFoods = new app.FoodList([]);
 				this.render();
 			}
 			this.appview.render();
@@ -73,9 +72,9 @@ var app = app || {};
 
 		addFood : function(event){
 			var food_id = event.target.id;
-			app.foodList.models.push(this.searchedFoods.models[food_id]);
+			app.foodList.models.push(app.SearchedFoods.models[food_id]);
 			localStorage.setItem('foods', JSON.stringify(app.foodList.models));
-			this.searchedFoods = new app.FoodList([]);
+			app.SearchedFoods = new app.FoodList([]);
 			this.appview.render();
 			this.render();
 		}
